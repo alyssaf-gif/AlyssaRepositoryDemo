@@ -4,4 +4,4 @@ itemType: Requirement
 requirementType: Software requirement (user)
 title: Display user info
 ---
-The system will dosplay the users full name and role after log in 
+The system will display the users full name and role after log in 
