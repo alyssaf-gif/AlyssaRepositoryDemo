@@ -29,7 +29,7 @@ jobs:
         run: npx cucumber-js Test-01.feature --format json:cucumber_report.json || true
       
       - name: Report to Ketryx
-        uses: Ketryx/ketryx-github-action@v3
+        uses: Ketryx/ketryx-github-action@v1
         with:
           api-key: ${{ secrets.KETRYX_API_KEY }}
           # The Project ID you provided earlier:
