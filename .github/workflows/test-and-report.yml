@@ -1,0 +1,31 @@
+name: Run Tests and Report to Ketryx
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run Cucumber tests with JSON output
+        run: npx cucumber-js --format json:cucumber.json
+        continue-on-error: true
+      
+      - name: Report to Ketryx
+        uses: Ketryx/ketryx-github-action@v3
+        with:
+          api-key: ${{ secrets.KETRYX_API_KEY }}
+          project: YOUR_PROJECT_ID  # KXPRJ2Q79QYTAXT8GQRAVV2GNW7RT5W
