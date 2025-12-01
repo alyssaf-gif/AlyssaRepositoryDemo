@@ -1,4 +1,4 @@
-@tests:KXITM5T7EMJSSDE9AXR01MEQ0MP9T9K 
+@tests:KXITM59VHJR381A9DWT6SKHN8HG4W4V 
 Feature: Test-01
 Scenario: Test mobile app login
 Given User is on login screen
