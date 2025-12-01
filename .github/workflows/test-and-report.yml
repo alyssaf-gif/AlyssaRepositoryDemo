@@ -18,22 +18,20 @@ jobs:
           node-version: '18'
       
       - name: Install dependencies
-        run: |
-          npm install
-          # We install this utility to convert JSON results to JUnit XML on the fly
-          npm install cucumber-junit --no-save
+        run: npm install
       
-      - name: Run Cucumber tests and Generate XML
+      - name: Run Specific Cucumber Test
         id: run-tests
-        # 1. Run cucumber and output JSON (|| true allows script to continue if tests fail)
-        # 2. Pipe the JSON into the converter to create junit.xml
-        run: |
-          npx cucumber-js --format json:cucumber.json || true
-          cat cucumber.json | npx cucumber-junit > junit.xml
+        # We target "Test-01.feature" specifically
+        # We format as JSON because Ketryx reads Cucumber JSON natively
+        # "|| true" ensures the step doesn't crash if the test fails, allowing the Report step to run
+        run: npx cucumber-js Test-01.feature --format json:cucumber_report.json || true
       
       - name: Report to Ketryx
         uses: Ketryx/ketryx-github-action@v3
         with:
           api-key: ${{ secrets.KETRYX_API_KEY }}
-          project: YOUR_PROJECT_ID  # KXPRJ2Q79QYTAXT8GQRAVV2GNW7RT5W
-          artifact-path: junit.xml
+          # The Project ID you provided earlier:
+          project: KXPRJ2Q79QYTAXT8GQRAVV2GNW7RT5W
+          # The specific path to the JSON report generated above:
+          test-cucumber-path: cucumber_report.json
