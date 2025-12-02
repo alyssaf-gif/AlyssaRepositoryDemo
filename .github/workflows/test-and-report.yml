@@ -23,6 +23,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.6'
+      - name: Ensure gradlew is executable
+        run: chmod +x java-src/gradlew
       - name: Run Java unit tests
         working-directory: java-src
         run: ./gradlew test
