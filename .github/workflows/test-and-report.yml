@@ -33,6 +33,6 @@ jobs:
         uses: Ketryx/ketryx-github-action@v1.4.0
         with:
           api-key: ${{ secrets.API_KEY_2 }}
-          project: ${{ secrets.PROJECT_ID }}
+          project: ${{ secrets.PROJECT_ID_2 }}
           build-name: "git-testing"
           test-cucumber-path: cucumber_report.json
