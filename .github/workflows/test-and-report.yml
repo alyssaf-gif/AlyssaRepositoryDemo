@@ -11,29 +11,41 @@ jobs:
   test-java:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
+        
+      # 1. Verify Structure (Temporary Debug Step)
+      # Uncomment this step to see the file structure in the runner
+      # - name: Debug - List Repository Root Contents
+      #   run: ls -R
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: temurin
           architecture: x64
+          
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.6'
-      - name: Run Java unit tests
-        working-directory: java-src
+          
+      - name: Run Java unit tests (from repository root)
+        # Assuming gradlew is in the root directory.
+        # **REMOVED working-directory: java-src**
         run: ./gradlew test
+        
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
           name: test-results-java
-          path: java-src/build/test-results/test/
+          # Path must be updated if gradlew is in the root
+          path: build/test-results/test/ 
           retention-days: 7
           if-no-files-found: error
+          
       - name: Report Java build to Ketryx
         uses: Ketryx/ketryx-github-action@v1
         if: success() || failure()
@@ -43,4 +55,5 @@ jobs:
           api-key: ${{ secrets.API_KEY }}
           commit-sha: ${{ github.event.pull_request.head.sha || github.sha }}
           build-name: ci-java
-          test-junit-path: java-src/build/test-results/test/*.xml
+          # Path must be updated if gradlew is in the root
+          test-junit-path: build/test-results/test/*.xml
