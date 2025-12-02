@@ -32,7 +32,7 @@ jobs:
       - name: Report to Ketryx
         uses: Ketryx/ketryx-github-action@v1.4.0
         with:
-          api-key: ${{ secrets.API_KEY }}
+          api-key: ${{ secrets.API_KEY_2 }}
           project: ${{ secrets.PROJECT_ID }}
           build-name: KXPRB29N35H00TG8RBTTVSKJ6FXG0WN
           test-cucumber-path: cucumber_report.json
