@@ -3,7 +3,6 @@ name: Run Tests and Report to Ketryx
 on:
   push:
     branches: [ main ]
-
   pull_request:
     branches: [ main ]
     
@@ -17,6 +16,8 @@ jobs:
       
       - name: Set up Node.js
         uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Specify Node.js version
       
       - name: Install dependencies
         run: npm install
@@ -29,8 +30,9 @@ jobs:
         run: npx cucumber-js Test-01.feature --format json:cucumber_report.json || true
       
       - name: Report to Ketryx
-        uses: Ketryx/ketryx-github-action@v3
+        uses: Ketryx/ketryx-github-action@v1.4.0
         with:
           api-key: ${{ secrets.API_KEY }}
           project: ${{ secrets.PROJECT_ID }}
           build-name: KXPRB29N35H00TG8RBTTVSKJ6FXG0WN
+          test-cucumber-path: cucumber_report.json
