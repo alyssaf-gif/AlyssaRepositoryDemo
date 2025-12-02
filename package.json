@@ -1,0 +1,11 @@
+{
+  "name": "alyssa-repository-demo",
+  "version": "1.0.0",
+  "description": "Cucumber tests for Ketryx integration",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.0.0"
+  }
+}
