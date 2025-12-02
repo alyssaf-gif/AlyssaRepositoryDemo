@@ -34,5 +34,5 @@ jobs:
         with:
           api-key: ${{ secrets.API_KEY_2 }}
           project: ${{ secrets.PROJECT_ID }}
-          build-name: KXPRB29N35H00TG8RBTTVSKJ6FXG0WN
+          build-name: "git-testing"
           test-cucumber-path: cucumber_report.json
